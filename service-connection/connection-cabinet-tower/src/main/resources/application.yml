@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: connection-cabinet-tower
+
+server:
+  tcp:
+    port: 8888
