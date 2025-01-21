@@ -1,0 +1,9 @@
+{
+    "properties": [
+        {
+            "name": "server.tcp.port",
+            "type": "java.lang.Integer",
+            "description": "TCP port to listen on"
+        }
+    ]
+}
