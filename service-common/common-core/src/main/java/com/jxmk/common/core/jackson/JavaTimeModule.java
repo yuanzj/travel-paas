@@ -12,9 +12,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * java 8 时间默认序列化
  */
-public class PigJavaTimeModule extends SimpleModule {
+public class JavaTimeModule extends SimpleModule {
 
-	public PigJavaTimeModule() {
+	public JavaTimeModule() {
 		super(PackageVersion.VERSION);
 
 		// ======================= 时间序列化规则 ===============================

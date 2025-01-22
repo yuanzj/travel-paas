@@ -1,0 +1,3 @@
+com.jxmk.common.core.config.JacksonConfiguration
+com.jxmk.common.core.config.WebMvcConfiguration
+com.jxmk.common.core.handler.GlobalBizExceptionHandler

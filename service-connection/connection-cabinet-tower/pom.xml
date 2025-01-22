@@ -24,6 +24,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
+         <!--web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 公共核心包 -->
+        <dependency>
+            <groupId>com.jxmk</groupId>
+            <artifactId>common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>

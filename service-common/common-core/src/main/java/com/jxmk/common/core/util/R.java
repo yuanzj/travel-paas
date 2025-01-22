@@ -4,13 +4,11 @@ import com.jxmk.common.core.constant.CommonConstants;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * 响应信息主体
- *
- * @param <T>
- * @author apple
  */
 @ToString
 @NoArgsConstructor
@@ -18,6 +16,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class R<T> implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Getter

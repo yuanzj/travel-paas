@@ -22,11 +22,6 @@
         <shardingsphere.version>5.4.1</shardingsphere.version>
     </properties>
     <dependencies>
-        <!--web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <!--监控-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,6 +47,7 @@
     </dependencies>
 
     <modules>
+        <module>service-common</module>
         <module>service-connection</module>
         <module>service-device</module>
         <module>service-data</module>

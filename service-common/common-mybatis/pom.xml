@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.jxmk</groupId>
+        <artifactId>service-common</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>common-mybatis</artifactId>
+    <packaging>jar</packaging>
+
+    <description>mybatis 封装</description>
+
+    <dependencies>
+		<!-- 公共核心包 -->
+		<dependency>
+			<groupId>com.jxmk</groupId>
+			<artifactId>common-core</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<!--server-api-->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!--mybatis-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring</artifactId>
+        </dependency>
+		<!-- mybatis-plus 3.5.9 需要单独引入此依赖-->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-jsqlparser</artifactId>
+		</dependency>
+    </dependencies>
+</project>

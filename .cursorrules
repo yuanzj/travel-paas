@@ -1,0 +1,174 @@
+技术栈：
+框架：Java Spring Boot 3 Maven，使用 Java 17
+依赖：Spring Web、MyBatis-Plus、Thymeleaf、Lombok、PostgreSQL 驱动
+
+实体类规范：
+1. 必须使用 @TableName 注解指定表名。
+2. 必须使用 @Data（来自 Lombok）注解标注实体类，除非在需求中另有说明。
+3. 必须使用 @TableId 注解标注主键，并指定类型，如：@TableId(type = IdType.AUTO)。
+4. 使用 @TableField 注解标注字段名，特别是当字段名与数据库列名不一致时。
+5. 使用 @TableLogic 标注逻辑删除字段。
+6. 根据需要使用 @Version 标注乐观锁字段。
+
+Mapper（DAO）规范：
+1. 必须使用 @Mapper 注解标注 Mapper 接口。
+2. Mapper 接口必须继承 BaseMapper<T>，其中 T 为对应的实体类。
+3. 对于复杂查询，使用 @Select、@Update、@Insert、@Delete 注解。
+4. 使用 XML 方式编写复杂 SQL 时，XML 文件必须放在 resources/mapper 目录下。
+5. 使用 LambdaQueryWrapper 或 QueryWrapper 构建动态查询条件。
+6. 分页查询必须使用 IPage 接口。
+
+Service 规范：
+1. Service 接口必须继承 IService<T>。
+2. ServiceImpl 类必须继承 ServiceImpl<M, T> 并实现对应的 Service 接口。
+3. 所有 ServiceImpl 类必须使用 @Service 注解。
+4. 使用 Wrapper 构建复杂查询条件，避免直接写 SQL。
+5. 批量操作使用 saveBatch、updateBatchById 等方法。
+6. 涉及事务的操作使用 @Transactional 注解。
+7. 使用 lambdaQuery() 和 lambdaUpdate() 方法构建类型安全的查询。
+
+分页查询规范：
+1. 统一使用 Page<T> 对象进行分页。
+2. 在 Controller 层接收分页参数：页码（current）和每页大小（size）。
+3. 使用 IPage<T> 作为分页查询结果的返回类型。
+4. 自定义分页结果时使用 PageDTO 进行封装。
+
+配置规范：
+1. 在 application.yml 中配置 MyBatis-Plus 相关设置：
+   - 日志配置
+   - 主键策略
+   - 逻辑删除
+   - 分页插件
+2. 必须配置 MybatisPlusInterceptor 用于分页等功能。
+3. 建议配置 OptimisticLockerInterceptor 用于乐观锁。
+
+查询构建规范：
+1. 优先使用 LambdaQueryWrapper 构建查询条件。
+2. 复杂条件查询使用 nested 嵌套查询。
+3. 需要 left join 等操作时使用 XML 自定义 SQL。
+4. 使用 last 方法时需要注意 SQL 注入风险。
+
+性能优化规范：
+1. 使用 @TableField(select = false) 排除不需要查询的字段。
+2. 大批量操作时使用 saveBatch 等批量方法。
+3. 复杂查询优先使用 XML 自定义 SQL。
+4. 合理使用 MyBatis-Plus 提供的缓存机制。
+
+其他规范保持不变，包括：
+- API 响应格式（R）
+- 异常处理（GlobalBizExceptionHandler）
+- Controller 层的规范
+- DTO 的使用规范
+
+
+## 1. 项目结构规范
+
+### 1.1 模块划分
+```plaintext
+travel-paas
+├── README.md
+├── doc                                     -- 接口文档
+├── db                                      -- 数据库脚本
+├── service-connection                      -- 连接管理
+│         ├── connection-cabinet-tower      -- 铁塔协议连接管理
+├── service-data                            -- 数据管理
+│         ├── data-cabinet                  -- 电柜数据管理
+└── service-device                          -- 设备管理
+    ├── device-cabinet                      -- 电柜设备管理
+```
+
+### 1.2 包命名规范
+- 基础包名：`com.jxmk`
+- 模块包名：`com.jxmk.{module}`
+- 子功能包名：`com.jxmk.{module}.{function}`
+
+## 2. 编码规范
+
+### 2.1 Java 类命名规范
+- Controller 层：以 `Controller` 结尾
+- Service 层：接口以 `Service` 结尾，实现类以 `ServiceImpl` 结尾
+- Mapper 层：以 `Mapper` 结尾
+- 实体类：领域模型无后缀，DTO 以 `DTO` 结尾，VO 以 `VO` 结尾
+- 枚举类：以 `Enum` 结尾
+
+### 2.2 注解使用规范
+- 类注解：
+  ```java
+  @Slf4j                // 日志
+  @Service              // 服务层
+  @RestController       // 控制器
+  @AllArgsConstructor   // 构造器
+  ```
+- 方法注解：
+  ```java
+  ```
+
+### 2.3 接口规范
+- 统一返回格式：使用 R.java 封装
+- 请求参数校验：使用 `jakarta.validation` 注解
+
+### 2.4 代码格式规范
+- 使用 `.editorconfig` 统一代码格式
+- 缩进使用 Tab
+- 文件末尾保留一个空行
+- 最大行宽 120 字符
+
+## 3. 数据库规范
+
+### 3.1 表命名规范
+- 使用小写字母，下划线分隔
+- 模块前缀：sys_、gen_、quartz_ 等
+
+### 3.2 字段命名规范
+- 主键：使用 `id` 或 `模块_id`
+- 创建时间：`create_time`
+- 更新时间：`update_time`
+- 删除标记：`del_flag`
+
+## 4. 文档规范
+
+### 4.1 注释规范
+- 类注释：
+```java
+/**
+ * 类描述
+ *
+ * @author 作者
+ * @date 创建日期
+ */
+```
+- 方法注释：
+```java
+/**
+ * 方法描述
+ * @param 参数名 参数说明
+ * @return 返回说明
+ */
+```
+
+### 4.2 提交规范
+- feat: 新功能
+- fix: 修复问题
+- docs: 文档修改
+- style: 代码格式修改
+- refactor: 代码重构
+- perf: 性能优化
+- test: 测试相关
+- chore: 其他修改
+
+## 5. 安全规范
+
+### 5.1 权限控制
+- 
+- 
+
+### 5.2 日志记录
+- 
+- 
+
+## 6. 异常处理规范
+- 使用全局异常处理器统一处理异常
+- 自定义业务异常继承 RuntimeException
+- 统一使用 R 对象封装异常响应
+
+这份开发规范基于项目现有代码结构和实践制定，建议团队成员严格遵守，以确保代码质量和项目可维护性。
