@@ -11,7 +11,7 @@
  Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 23/01/2025 23:32:01
+ Date: 24/01/2025 17:41:57
 */
 
 SET NAMES utf8mb4;
@@ -40,11 +40,12 @@ DROP TABLE IF EXISTS `dev_cabinet`;
 CREATE TABLE `dev_cabinet` (
   `cabinet_id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `cabinet_sn` varchar(64) NOT NULL COMMENT '电柜序列号',
-  `cabinet_model` varchar(32) DEFAULT NULL COMMENT '电柜型号',
+  `cabinet_model` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '电柜型号',
   `cabinet_name` varchar(100) DEFAULT NULL COMMENT '电柜名称',
   `cabinet_gate_count` int DEFAULT NULL COMMENT '仓门数量',
   `cabinet_status` tinyint NOT NULL DEFAULT '0' COMMENT '状态 0：未激活 1：已激活 2：维护中 3：已退库',
   `cabinet_protocol` tinyint NOT NULL DEFAULT '1' COMMENT '协议类型 1：铁塔协议',
+  `online_status` tinyint DEFAULT '0' COMMENT '在线状态：0-离线，1-在线',
   `first_report_time` datetime DEFAULT NULL COMMENT '首次上报时间',
   `last_report_time` datetime DEFAULT NULL COMMENT '最后上报时间',
   `manufacturer` varchar(100) DEFAULT NULL COMMENT '制造商',
@@ -62,14 +63,14 @@ CREATE TABLE `dev_cabinet` (
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记 0：未删除 1：已删除',
   PRIMARY KEY (`cabinet_id`),
   UNIQUE KEY `uk_cabinet_sn` (`cabinet_sn`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电柜信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=1882601226408812546 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电柜信息表';
 
 -- ----------------------------
 -- Table structure for dev_cabinet_gate
 -- ----------------------------
 DROP TABLE IF EXISTS `dev_cabinet_gate`;
 CREATE TABLE `dev_cabinet_gate` (
-  `id` bigint NOT NULL COMMENT '主键',
+  `cabinet_gate_id` bigint NOT NULL COMMENT '主键ID',
   `cabinet_sn` varchar(64) NOT NULL COMMENT '电柜序列号',
   `gate_no` int NOT NULL COMMENT '仓门编号',
   `gate_status` tinyint DEFAULT NULL COMMENT '仓门状态：-1：停用；0：关；1：开',
@@ -89,7 +90,7 @@ CREATE TABLE `dev_cabinet_gate` (
   `update_by` varchar(64) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记 0：未删除 1：已删除',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`cabinet_gate_id`),
   UNIQUE KEY `uk_cabinet_sn_gate_no` (`cabinet_sn`,`gate_no`),
   KEY `idx_battery_sn` (`battery_sn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电柜仓门表';
@@ -106,15 +107,17 @@ CREATE TABLE `dev_cabinet_task` (
   `cabinet_sn` varchar(64) NOT NULL COMMENT '电柜序列号',
   `put_gate_no` int DEFAULT NULL COMMENT '放入仓门号',
   `put_battery_sn` varchar(64) DEFAULT NULL COMMENT '放入电池序列号',
+  `put_battery_soc` int DEFAULT NULL COMMENT '归还电池电量',
   `put_battery_time` datetime DEFAULT NULL COMMENT '放入电池时间',
   `get_gate_no` int DEFAULT NULL COMMENT '取出仓门号',
   `get_battery_sn` varchar(64) DEFAULT NULL COMMENT '取出电池序列号',
+  `get_battery_soc` int DEFAULT NULL COMMENT '获取电池电量',
   `get_battery_time` datetime DEFAULT NULL COMMENT '取出电池时间',
   `failed_code` int DEFAULT NULL COMMENT '失败代码',
   `failed_time` datetime DEFAULT NULL COMMENT '失败时间',
   `request_id` varchar(64) DEFAULT NULL COMMENT '请求ID',
   `request_card_sn` varchar(64) DEFAULT NULL COMMENT '请求卡号',
-  `request_user_id` bigint DEFAULT NULL COMMENT '请求用户ID',
+  `request_user_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '请求用户ID',
   `request_put_battery_sn` varchar(64) DEFAULT NULL COMMENT '请求放入电池序列号',
   `request_gate_no` int DEFAULT NULL COMMENT '请求仓门号',
   `request_battery_voltage` decimal(10,2) DEFAULT NULL COMMENT '请求电池电压',

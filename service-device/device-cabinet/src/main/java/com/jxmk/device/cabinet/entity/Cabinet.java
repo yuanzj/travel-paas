@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @TableName("dev_cabinet")
 public class Cabinet {
 
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long cabinetId;
 
     private String cabinetSn;
@@ -23,6 +23,8 @@ public class Cabinet {
     private Integer cabinetStatus;
 
     private Integer cabinetProtocol;
+    
+    private Integer onlineStatus;
 
     private LocalDateTime firstReportTime;
 
