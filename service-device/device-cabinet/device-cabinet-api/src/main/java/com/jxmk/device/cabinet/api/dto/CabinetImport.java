@@ -10,7 +10,7 @@ public class CabinetImport {
     private String manufacturer;
     
     @ExcelProperty("电柜型号")
-    private String model;
+    private String cabinetModel;
     
     @ExcelProperty("电柜编号")
     private String cabinetSn;

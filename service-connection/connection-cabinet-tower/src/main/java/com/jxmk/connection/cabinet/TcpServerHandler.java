@@ -7,7 +7,6 @@ import com.jxmk.connection.cabinet.handler.message.MessageHandlerFactory;
 import com.jxmk.connection.cabinet.service.DeviceService;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.ReferenceCountUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

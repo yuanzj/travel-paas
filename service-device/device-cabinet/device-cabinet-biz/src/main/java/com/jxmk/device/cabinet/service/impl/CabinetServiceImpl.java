@@ -230,7 +230,7 @@ public class CabinetServiceImpl extends ServiceImpl<CabinetMapper, Cabinet> impl
     public void importCabinet(List<CabinetImport> list) {
         // 1. 校验必填字段
         list.forEach(dto -> {
-            if (dto.getManufacturer() == null || dto.getModel() == null ||
+            if (dto.getManufacturer() == null || dto.getCabinetModel() == null ||
                     dto.getCabinetSn() == null || dto.getGateCount() == null ||
                     dto.getProtocol() == null) {
                 throw new IllegalArgumentException("存在必填字段为空");
