@@ -1,15 +1,18 @@
 package com.jxmk.connection.cabinet.model;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Data
-@Builder
-public class RemoteControl {
-    private Integer msgType;  // 500
-    private String devId;
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RemoteControl extends BaseMessage {
     private List<ControlParam> paramList;
-    private String txnNo;
-} 
+}

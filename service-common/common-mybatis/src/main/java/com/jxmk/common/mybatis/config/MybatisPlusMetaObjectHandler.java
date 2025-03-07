@@ -5,14 +5,10 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.jxmk.common.core.constant.CommonConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ClassUtils;
 
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 /**
  * MybatisPlus 自动填充配置
@@ -75,16 +71,7 @@ public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
 	 * @return 当前用户名
 	 */
 	private String getUserName() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		// 匿名接口直接返回
-		if (authentication instanceof AnonymousAuthenticationToken) {
-			return null;
-		}
-
-		if (Optional.ofNullable(authentication).isPresent()) {
-			return authentication.getName();
-		}
-
+		
 		return null;
 	}
 

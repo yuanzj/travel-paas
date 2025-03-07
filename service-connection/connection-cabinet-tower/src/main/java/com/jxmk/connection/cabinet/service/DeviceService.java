@@ -1,7 +1,9 @@
 package com.jxmk.connection.cabinet.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jxmk.connection.cabinet.model.R;
+import com.jxmk.common.core.util.R;
+import com.jxmk.connection.cabinet.exception.TravelOfflineException;
+import com.jxmk.connection.cabinet.exception.TravelTimeoutException;
 import com.jxmk.connection.cabinet.model.RemoteControl;
 import com.jxmk.connection.cabinet.model.Response;
 import io.netty.channel.Channel;
@@ -56,7 +58,7 @@ public class DeviceService {
     public R<String> sendControl(RemoteControl control) {
         Channel channel = deviceChannels.get(control.getDevId());
         if (channel == null || !channel.isActive()) {
-            return R.fail("设备不在线");
+            throw new TravelOfflineException("设备不在线");
         }
 
         CompletableFuture<Response> future = new CompletableFuture<>();
@@ -65,18 +67,15 @@ public class DeviceService {
             pendingControls.put(control.getTxnNo(), future);
             channel.writeAndFlush(message);
 
-            // 等待设备响应，10秒超时
-            Response response = future.get(10, TimeUnit.SECONDS);
-            return response.getResult() == 1 ?
-                    R.ok(response.getTxnNo()) :
-                    R.fail("设备执行失败");
-
+            // 等待设备响应，30秒超时
+            Response response = future.get(30, TimeUnit.SECONDS);
+            return response.getResult() == 1 ? R.ok(response.getTxnNo()) : R.failed("设备执行失败");
         } catch (TimeoutException e) {
             log.error("等待设备响应超时");
-            return R.fail("设备响应超时");
+            throw new TravelTimeoutException("等待设备响应超时");
         } catch (Exception e) {
             log.error("发送控制命令失败", e);
-            return R.fail("发送控制命令失败");
+            throw new RuntimeException("发送控制命令失败");
         } finally {
             pendingControls.remove(control.getTxnNo());
         }
@@ -118,4 +117,4 @@ public class DeviceService {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
-} 
+}

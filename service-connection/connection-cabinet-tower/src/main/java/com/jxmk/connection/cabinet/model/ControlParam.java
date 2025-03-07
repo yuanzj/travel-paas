@@ -1,8 +1,10 @@
 package com.jxmk.connection.cabinet.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ControlParam {
     private String id;           // 信号量ID
     private String value;        // 参数值

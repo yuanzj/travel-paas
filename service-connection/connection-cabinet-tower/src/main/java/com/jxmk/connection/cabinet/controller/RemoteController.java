@@ -1,6 +1,6 @@
 package com.jxmk.connection.cabinet.controller;
 
-import com.jxmk.connection.cabinet.model.R;
+import com.jxmk.common.core.util.R;
 import com.jxmk.connection.cabinet.model.RemoteControl;
 import com.jxmk.connection.cabinet.service.DeviceService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +17,11 @@ public class RemoteController {
 
     private final DeviceService deviceService;
 
+    /**
+     * 远程控制
+     * @param control 控制命令
+     * @return 控制结果
+     */
     @PostMapping("/control")
     public R<String> control(@RequestBody RemoteControl control) {
         log.info("收到远程控制请求: {}", control);

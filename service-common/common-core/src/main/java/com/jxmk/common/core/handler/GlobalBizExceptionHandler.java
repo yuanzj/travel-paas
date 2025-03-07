@@ -3,8 +3,6 @@ package com.jxmk.common.core.handler;
 import com.jxmk.common.core.util.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -52,19 +50,6 @@ public class GlobalBizExceptionHandler {
 		return R.failed(exception.getMessage());
 	}
 
-	/**
-	 * AccessDeniedException
-	 * @param e the e
-	 * @return R
-	 */
-	@ExceptionHandler(AccessDeniedException.class)
-	@ResponseStatus(HttpStatus.FORBIDDEN)
-	public R<String> handleAccessDeniedException(AccessDeniedException e) {
-		String msg = SpringSecurityMessageSource.getAccessor()
-			.getMessage("AbstractAccessDecisionManager.accessDenied", e.getMessage());
-		log.warn("拒绝授权异常信息 ex={}", msg);
-		return R.failed(msg);
-	}
 
 	/**
 	 * validation Exception

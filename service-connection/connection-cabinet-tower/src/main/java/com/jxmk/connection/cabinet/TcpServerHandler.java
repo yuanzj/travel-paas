@@ -2,15 +2,16 @@ package com.jxmk.connection.cabinet;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jxmk.connection.cabinet.handler.MessageHandler;
+import com.jxmk.connection.cabinet.handler.message.MessageHandler;
+import com.jxmk.connection.cabinet.handler.message.MessageHandlerFactory;
 import com.jxmk.connection.cabinet.service.DeviceService;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.ReferenceCountUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 @Slf4j
@@ -19,7 +20,7 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final DeviceService deviceService;
-    private final Map<Integer, MessageHandler> messageHandlers;
+    private final MessageHandlerFactory messageHandlerFactory;
     private final Executor messageHandlerExecutor;
     @Setter
     private String deviceId;
@@ -33,7 +34,7 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
             JsonNode jsonNode = objectMapper.readTree(message);
             int msgType = jsonNode.get("msgType").asInt();
 
-            MessageHandler handler = messageHandlers.get(msgType);
+            MessageHandler handler = messageHandlerFactory.getHandler(msgType);
             if (handler != null) {
                 messageHandlerExecutor.execute(() -> {
                     try {

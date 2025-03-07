@@ -14,15 +14,11 @@
     <description>铁塔协议电柜连接管理服务</description>
 
     <dependencies>
-        <!-- hutool 核心模块 -->
+        <!-- API模块 -->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-        </dependency>
-        <!-- redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+            <groupId>com.jxmk</groupId>
+            <artifactId>device-cabinet-api</artifactId>
+            <version>${revision}</version>
         </dependency>
          <!--web-->
         <dependency>
@@ -34,6 +30,11 @@
             <groupId>com.jxmk</groupId>
             <artifactId>common-core</artifactId>
             <version>${revision}</version>
+        </dependency>
+        <!-- Kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
     </dependencies>
 
