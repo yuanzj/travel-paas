@@ -2,29 +2,30 @@ package com.jxmk.device.cabinet.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jxmk.device.cabinet.api.constant.RedisConstants;
+import com.jxmk.device.cabinet.api.dto.CabinetImport;
 import com.jxmk.device.cabinet.api.dto.CabinetOperateRequest;
 import com.jxmk.device.cabinet.api.dto.CabinetOperateResponse;
 import com.jxmk.device.cabinet.api.entity.Cabinet;
-import com.jxmk.device.cabinet.api.entity.CabinetTask;
 import com.jxmk.device.cabinet.api.entity.CabinetGate;
-import com.jxmk.device.cabinet.api.constant.RedisConstants;
-import com.jxmk.device.cabinet.api.dto.CabinetImport;
+import com.jxmk.device.cabinet.api.entity.CabinetTask;
+import com.jxmk.device.cabinet.api.enums.CabinetOperateEnum;
+import com.jxmk.device.cabinet.api.enums.TaskStatusEnum;
 import com.jxmk.device.cabinet.mapper.CabinetMapper;
+import com.jxmk.device.cabinet.service.CabinetGateService;
 import com.jxmk.device.cabinet.service.CabinetService;
 import com.jxmk.device.cabinet.service.CabinetTaskService;
 import com.jxmk.device.cabinet.service.KafkaMessageService;
-import com.jxmk.device.cabinet.service.CabinetGateService;
-import com.jxmk.device.cabinet.api.enums.CabinetOperateEnum;
-import com.jxmk.device.cabinet.api.enums.TaskStatusEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j

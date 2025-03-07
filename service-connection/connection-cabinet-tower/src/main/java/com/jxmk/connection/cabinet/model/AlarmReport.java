@@ -1,10 +1,10 @@
 package com.jxmk.connection.cabinet.model;
 
-import lombok.Data;
-import lombok.experimental.SuperBuilder;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 

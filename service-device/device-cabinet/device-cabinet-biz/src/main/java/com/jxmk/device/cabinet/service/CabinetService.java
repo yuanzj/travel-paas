@@ -1,10 +1,11 @@
 package com.jxmk.device.cabinet.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jxmk.device.cabinet.api.dto.CabinetImport;
 import com.jxmk.device.cabinet.api.dto.CabinetOperateRequest;
 import com.jxmk.device.cabinet.api.dto.CabinetOperateResponse;
 import com.jxmk.device.cabinet.api.entity.Cabinet;
-import com.jxmk.device.cabinet.api.dto.CabinetImport;
+
 import java.util.List;
 
 public interface CabinetService extends IService<Cabinet> {

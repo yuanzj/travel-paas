@@ -1,17 +1,15 @@
 package com.jxmk.connection.cabinet.handler.message;
 
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.kafka.core.KafkaTemplate;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jxmk.connection.cabinet.model.BaseMessage;
 import com.jxmk.connection.cabinet.model.Response;
 import com.jxmk.connection.cabinet.service.DeviceService;
 import com.jxmk.device.cabinet.api.constant.RedisConstants;
 import com.jxmk.device.cabinet.api.entity.Cabinet;
-
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 
 /**
  * 消息处理器抽象基类

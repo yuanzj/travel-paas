@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.jxmk.device.cabinet.api.enums.CabinetOperateEnum;
 import com.jxmk.device.cabinet.api.enums.TaskStatusEnum;
 import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

@@ -2,6 +2,7 @@ package com.jxmk.device.cabinet.api.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+
 import java.time.LocalDateTime;
 
 @Data

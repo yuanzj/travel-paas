@@ -1,9 +1,13 @@
 package com.jxmk.connection.cabinet.handler.message;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jxmk.connection.cabinet.enums.CabinetSignalEnum;
+import com.jxmk.connection.cabinet.enums.MessageTypeEnum;
 import com.jxmk.connection.cabinet.model.AlarmReport;
 import com.jxmk.connection.cabinet.model.Response;
 import com.jxmk.connection.cabinet.service.DeviceService;
+import com.jxmk.device.cabinet.api.constant.KafkaConstants;
+import com.jxmk.device.cabinet.api.constant.RedisConstants;
 import com.jxmk.device.cabinet.api.entity.CabinetTask;
 import com.jxmk.device.cabinet.api.enums.CabinetOperateEnum;
 import com.jxmk.device.cabinet.api.enums.TaskStatusEnum;
@@ -14,11 +18,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-import com.jxmk.device.cabinet.api.constant.KafkaConstants;
-import com.jxmk.device.cabinet.api.constant.RedisConstants;
-import com.jxmk.connection.cabinet.enums.CabinetSignalEnum;
-import com.jxmk.connection.cabinet.enums.MessageTypeEnum;
 
 @Slf4j
 @Component

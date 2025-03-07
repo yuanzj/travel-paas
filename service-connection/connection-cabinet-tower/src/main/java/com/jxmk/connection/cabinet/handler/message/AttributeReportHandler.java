@@ -1,16 +1,14 @@
 package com.jxmk.connection.cabinet.handler.message;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jxmk.connection.cabinet.enums.MessageTypeEnum;
 import com.jxmk.connection.cabinet.model.AttributeReport;
 import com.jxmk.connection.cabinet.model.Response;
 import com.jxmk.connection.cabinet.service.DeviceService;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import com.jxmk.connection.cabinet.enums.MessageTypeEnum;
 
 @Slf4j
 @Component

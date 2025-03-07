@@ -7,9 +7,10 @@ import com.jxmk.common.mybatis.plugins.TravelPaginationInnerInterceptor;
 import com.jxmk.common.mybatis.resolver.SqlFilterArgumentResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.lang.NonNull;
+
 import java.util.List;
 
 /**
